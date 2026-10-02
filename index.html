@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MinimumShare — Context-Aware Privacy Checker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="topnav">
+    <div class="topnav-inner">
+      <div class="brand">
+        <svg class="brand-mark" viewBox="0 0 28 32" fill="none" aria-hidden="true" focusable="false">
+          <!-- Shield outline -->
+          <path d="M14 1.5 L26 6 L26 16 C26 23 20.5 28.5 14 30.5 C7.5 28.5 2 23 2 16 L2 6 Z"
+                fill="#1b3358" stroke="none"/>
+          <!-- Data-minimization lines: full, shorter, shortest -->
+          <line x1="7"  y1="13" x2="21" y2="13" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="7"  y1="18" x2="18" y2="18" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="7"  y1="23" x2="13" y2="23" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+        <span class="wordmark">MinimumShare</span>
+      </div>
+      <div class="topnav-status">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span class="status-label">Local processing</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Privacy Check</p>
+      <h1 class="hero-heading">Share less. Stay in control.</h1>
+      <p class="hero-sub">Review sensitive information before you post, paste, or send it.</p>
+      <p class="hero-local">
+        <svg class="hero-local-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M8 4v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        Analysis happens locally in your browser.
+      </p>
+    </div>
+  </div>
+
+  <main>
+
+    <section class="workspace" aria-labelledby="workspace-heading">
+      <h2 id="workspace-heading" class="visually-hidden">Review your text</h2>
+
+      <div class="workspace-card">
+
+        <div class="workspace-main">
+
+          <div class="field-group">
+            <label for="user-text">Text to review</label>
+            <textarea
+              id="user-text"
+              name="user-text"
+              rows="10"
+              placeholder="Paste the text you are about to share…"
+              spellcheck="false"
+            ></textarea>
+          </div>
+
+          <div class="field-group">
+            <label for="custom-terms">Protected terms <span class="label-optional">(optional)</span></label>
+            <input
+              type="text"
+              id="custom-terms"
+              name="custom-terms"
+              placeholder="e.g. company name, project codename — separate with commas"
+            >
+            <p class="field-hint">Words or phrases you personally never want to share.</p>
+          </div>
+
+          <div class="submit-row">
+            <button type="button" id="check-btn" class="btn-primary">Check Before Sharing</button>
+          </div>
+
+          <p id="validation-message" class="validation-message hidden" role="alert" aria-live="polite"></p>
+
+        </div>
+
+        <aside class="workspace-context" aria-label="Sharing context">
+          <div class="context-panel">
+            <p class="context-panel-heading">Where will this be shared?</p>
+
+            <div class="field-group">
+              <label for="sharing-context" class="visually-hidden">Sharing context</label>
+              <select id="sharing-context" name="sharing-context">
+                <option value="publicPost">Public Post</option>
+                <option value="aiChatbot">AI / Chatbot</option>
+                <option value="unknownPerson">Unknown Person</option>
+                <option value="customerSupport">Customer Support</option>
+                <option value="jobApplication">Job Application</option>
+              </select>
+            </div>
+
+            <div class="context-hint" id="context-hint-text" aria-live="polite">
+              <p>A public post can be seen by anyone. Even seemingly harmless details can be combined to identify you.</p>
+            </div>
+
+            <div class="context-assurance">
+              <svg class="assurance-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M8 1.5L2 4v4.5C2 11.54 4.72 14.23 8 15c3.28-.77 6-3.46 6-6.5V4L8 1.5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+              </svg>
+              <span>Your text is never uploaded.</span>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+
+    <section class="scenarios-section" aria-labelledby="scenarios-heading">
+      <h2 id="scenarios-heading" class="scenarios-label">Try an Example</h2>
+      <div class="demo-buttons">
+        <button type="button" class="btn-demo" data-demo="publicPost">
+          <span class="demo-label">Public Post</span>
+        </button>
+        <button type="button" class="btn-demo" data-demo="aiChatbot">
+          <span class="demo-label">AI / Chatbot</span>
+        </button>
+        <button type="button" class="btn-demo" data-demo="customerSupport">
+          <span class="demo-label">Customer Support</span>
+        </button>
+        <button type="button" class="btn-demo" data-demo="jobApplication">
+          <span class="demo-label">Job Application</span>
+        </button>
+        <button type="button" class="btn-demo" data-demo="safeMessage">
+          <span class="demo-label">Safe Message</span>
+        </button>
+      </div>
+    </section>
+
+    <div class="trust-strip" aria-label="Privacy assurances">
+      <div class="trust-item">
+        <svg class="trust-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M10 2L3 5.5v5C3 14.08 6.13 17.28 10 18c3.87-.72 7-3.92 7-7.5v-5L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Local analysis</span>
+      </div>
+      <div class="trust-divider" aria-hidden="true"></div>
+      <div class="trust-item">
+        <svg class="trust-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <rect x="4" y="9" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M7 9V6.5a3 3 0 016 0V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span>No uploads</span>
+      </div>
+      <div class="trust-divider" aria-hidden="true"></div>
+      <div class="trust-item">
+        <svg class="trust-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="10" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M4 17c0-3.31 2.69-6 6-6s6 2.69 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="15" y1="6" x2="17" y2="4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="15" y1="4" x2="17" y2="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span>No account required</span>
+      </div>
+    </div>
+
+    <section id="results" class="hidden" aria-labelledby="results-heading">
+      <h2 id="results-heading" class="visually-hidden">Analysis Results</h2>
+
+      <div class="results-summary-card">
+
+        <div id="score-section" aria-labelledby="score-heading">
+          <h3 id="score-heading" class="result-section-heading">Privacy Exposure Score</h3>
+          <div id="score-display">
+            <div id="score-ring">
+              <svg viewBox="0 0 100 100" aria-hidden="true">
+                <circle class="ring-track" cx="50" cy="50" r="42"/>
+                <circle class="ring-fill" cx="50" cy="50" r="42"/>
+              </svg>
+              <div class="ring-center">
+                <span id="score-value">—</span>
+                <span id="score-band-label">—</span>
+              </div>
+            </div>
+            <div class="score-meta">
+              <p class="score-context-label" id="score-context-label">Run an analysis to see your exposure score.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary-divider" aria-hidden="true"></div>
+
+        <div id="receipt-section" aria-labelledby="receipt-heading">
+          <h3 id="receipt-heading" class="result-section-heading">Privacy Receipt</h3>
+          <div id="receipt-cards">
+            <div class="receipt-card" id="receipt-total">
+              <span class="receipt-number">—</span>
+              <span class="receipt-label">Items Detected</span>
+            </div>
+            <div class="receipt-stat-divider" aria-hidden="true"></div>
+            <div class="receipt-card" id="receipt-redacted">
+              <span class="receipt-number">—</span>
+              <span class="receipt-label">For Redaction</span>
+            </div>
+            <div class="receipt-stat-divider" aria-hidden="true"></div>
+            <div class="receipt-card" id="receipt-retained">
+              <span class="receipt-number">—</span>
+              <span class="receipt-label">Retained</span>
+            </div>
+            <div class="receipt-stat-divider" aria-hidden="true"></div>
+            <div class="receipt-card" id="receipt-reduction">
+              <span class="receipt-number">—</span>
+              <span class="receipt-label">Exposure Reduction</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="map-section" aria-labelledby="map-heading">
+        <h3 id="map-heading" class="result-section-heading">Data Exposure Map</h3>
+        <ul id="exposure-map" class="exposure-map">
+          <li class="map-row" data-category="Contact">
+            <span class="map-category-name">Contact</span>
+            <div class="map-bar-track"><div class="map-bar" id="map-bar-contact"></div></div>
+            <span class="map-bar-value" id="map-val-contact">0</span>
+          </li>
+          <li class="map-row" data-category="Authentication">
+            <span class="map-category-name">Authentication</span>
+            <div class="map-bar-track"><div class="map-bar" id="map-bar-authentication"></div></div>
+            <span class="map-bar-value" id="map-val-authentication">0</span>
+          </li>
+          <li class="map-row" data-category="Financial">
+            <span class="map-category-name">Financial</span>
+            <div class="map-bar-track"><div class="map-bar" id="map-bar-financial"></div></div>
+            <span class="map-bar-value" id="map-val-financial">0</span>
+          </li>
+          <li class="map-row" data-category="Technical">
+            <span class="map-category-name">Technical</span>
+            <div class="map-bar-track"><div class="map-bar" id="map-bar-technical"></div></div>
+            <span class="map-bar-value" id="map-val-technical">0</span>
+          </li>
+          <li class="map-row" data-category="Identifiers">
+            <span class="map-category-name">Identifiers</span>
+            <div class="map-bar-track"><div class="map-bar" id="map-bar-identifiers"></div></div>
+            <span class="map-bar-value" id="map-val-identifiers">0</span>
+          </li>
+          <li class="map-row" data-category="Other">
+            <span class="map-category-name">Other</span>
+            <div class="map-bar-track"><div class="map-bar" id="map-bar-other"></div></div>
+            <span class="map-bar-value" id="map-val-other">0</span>
+          </li>
+        </ul>
+      </div>
+
+      <div id="detection-list-section" aria-labelledby="detection-list-heading">
+        <h3 id="detection-list-heading" class="result-section-heading">Detected Items</h3>
+        <ul id="detection-list"></ul>
+      </div>
+
+      <div id="safe-review-section" aria-labelledby="safe-review-heading">
+        <h3 id="safe-review-heading" class="result-section-heading">Safe Review</h3>
+        <p class="section-description">Your original text with sensitive items highlighted.</p>
+        <div id="safe-review-output" class="safe-review-output"></div>
+      </div>
+
+      <div id="clean-version-section" aria-labelledby="clean-version-heading">
+        <div class="clean-version-header">
+          <div>
+            <h3 id="clean-version-heading" class="result-section-heading">Minimum Necessary Version</h3>
+            <p class="section-description">Sensitive items replaced with safe placeholders — ready to share.</p>
+          </div>
+          <button type="button" id="copy-clean-btn" class="btn-copy">Copy Clean Version</button>
+        </div>
+        <div id="clean-version-output" class="clean-version-output"></div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p class="privacy-notice">Your text stays in this browser. MinimumShare does not upload or store the content you analyze.</p>
+      <p class="disclaimer">MinimumShare provides pattern-based privacy guidance and may not identify every sensitive item. Always review information before sharing.</p>
+    </div>
+  </footer>
+
+  <script defer src="rules.js"></script>
+  <script defer src="app.js"></script>
+
+</body>
+</html>
