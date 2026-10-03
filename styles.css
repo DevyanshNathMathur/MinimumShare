@@ -820,4 +820,11 @@ footer {
   #score-display { flex-direction: column; align-items: flex-start; gap: var(--s4); }
   .btn-primary { width: 100%; }
   .demo-buttons { display: grid; grid-template-columns: 1fr 1fr; }
+
+  .copyright {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: var(--text-muted, #667085);
+  text-align: center;
+}
 }
