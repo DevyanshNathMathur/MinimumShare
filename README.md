@@ -152,3 +152,11 @@ MinimumShare/
 ├── rules.js
 ├── app.js
 └── README.md
+
+## Author
+
+Developed by Devyansh Nath Mathur.
+
+## Copyright
+
+Copyright © 2026 Devyansh Nath Mathur. All rights reserved.
