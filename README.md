@@ -152,6 +152,7 @@ MinimumShare/
 ├── rules.js
 ├── app.js
 └── README.md
+```
 
 ## Author
 
