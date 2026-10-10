@@ -4,6 +4,8 @@
 
 > Share only what the situation needs.
 
+🌐 Live Application: https://devyanshnathmathur.github.io/MinimumShare/
+
 MinimumShare is a browser-based privacy tool that helps users review sensitive information before sharing text in different situations such as public posts, AI/chatbot conversations, customer support messages, job applications, or communication with unknown people.
 
 Unlike simple pattern scanners, MinimumShare considers **where the information is being shared** before recommending whether an item is likely needed, should be reviewed, should be avoided, or should never be shared.
